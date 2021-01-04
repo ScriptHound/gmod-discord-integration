@@ -7,4 +7,4 @@ Before start you need to configurate the integration with your own discord token
 Ill add bot and chat automatical handling later.
 
 The integration is being lauchned in that way:
-python http_srv.py
+python main.py
