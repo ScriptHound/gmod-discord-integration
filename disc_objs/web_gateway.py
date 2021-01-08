@@ -1,6 +1,8 @@
 import json
 import asyncio
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 class WebGateway:
     def __init__(self, bot, websocket):
@@ -18,13 +20,13 @@ class WebGateway:
         r = json.loads(await self.websocket.recv())
 
         if r["op"] == 11:
-            print("heartbeat was acknowledged")
+            logging.info("heartbeat was acknowledged")
         else:
-            print(r, "Heartbeat was not acknowledged")
+            logging.info(r, "Heartbeat was not acknowledged")
 
     async def connect_websocket(self):
         r = await self.websocket.recv()
-        print(r)
+        logging.info(r)
 
         await self.__acknowledge_heartbeat()
 
@@ -46,7 +48,7 @@ class WebGateway:
             })
         )
         json.dumps(json.loads(await self.websocket.recv()), indent=4)
-        print("Connection created", sep='\n')
+        logging.info("Connection created")
 
     async def heartbeat(self):
     
@@ -58,11 +60,11 @@ class WebGateway:
 
         json.dumps(json.loads(await self.websocket.recv()), indent=4)
         
-        print("Heartbeat has been sent", '\n')
+        logging.info("Heartbeat has been sent")
 
     async def wait_for_message(self):
         await asyncio.sleep(1)
-        print("Waiting for a message")
+        logging.info("Waiting for a message")
         
         try:
             data = await asyncio.wait_for(self.websocket.recv(), timeout=35)
@@ -73,4 +75,4 @@ class WebGateway:
             return data
         
         except asyncio.TimeoutError:
-            print("Timeout reached")
+            logging.info("Timeout reached")

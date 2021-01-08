@@ -1,3 +1,5 @@
+#message factory returns on of the successors 
+#depending of the type of a message
 class MessageFactory:
     def __init__(self, message_dict):
         self.successor = None
@@ -33,9 +35,6 @@ class Message:
 class Author:
     def __init__(self, data_dict):
         self.username = data_dict['username']
-        #self.public_flags = data_dict['public_flags']
-        
         self.id = data_dict['id']
-        #self.discriminator = data_dict['discriminator']
         
         self.avatar = data_dict['avatar']

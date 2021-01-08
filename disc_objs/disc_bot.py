@@ -1,6 +1,7 @@
+from .disc_api import API
+from .storage import Storage
+
 import requests
-from disc_api import API
-from storage import Storage
 import json
 
 class Bot():
@@ -38,7 +39,6 @@ class Bot():
 
     def get_websocket_server(self):
         r, headers = self.api.websocket_server_url()
-
         r = requests.get(r,
             headers=headers
         ).json()
